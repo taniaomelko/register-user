@@ -16,6 +16,10 @@ async function enableMocking() {
       },
     });
   } else if (import.meta.env.MODE === 'production') {
+    console.log(
+      'import.meta.env.VITE_PUBLIC_URL', import.meta.env.VITE_PUBLIC_URL
+    );
+    
     const { worker } = await import('./mocks/browser');
     worker.start({
       serviceWorker: {
