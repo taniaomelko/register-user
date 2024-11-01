@@ -19,7 +19,7 @@ async function enableMocking() {
     const { worker } = await import('./mocks/browser');
     worker.start({
       serviceWorker: {
-        url: `${import.meta.env.VITE_PUBLIC_URL}mockServiceWorker.js`,
+        url: `${import.meta.env.VITE_PUBLIC_URL || ''}mockServiceWorker.js`,
       },
     });
   }
