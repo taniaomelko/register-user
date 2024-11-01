@@ -16,7 +16,7 @@ async function enableMocking() {
     const { worker } = await import('./mocks/browser');
     worker.start({
       serviceWorker: {
-        url: `{${process.env.PUBLIC_URL}/register-user/mockServiceWorker.js`,
+        url: `${process.env.PUBLIC_URL}/register-user/mockServiceWorker.js`,
       },
     });
   }
