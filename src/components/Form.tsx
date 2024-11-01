@@ -14,9 +14,9 @@ export const Form: React.FC = () => {
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<tFormData>();
 
   const apiUrl =
-    process.env.NODE_ENV === "production"
-      ? `${process.env.PUBLIC_URL}/register-user`
-      : "http://localhost:5173"; 
+    import.meta.env.MODE === "production"
+      ? `${import.meta.env.VITE_API_BASE_URL}`
+      : "http://localhost:5173";
 
   const mutation = useMutation({
     mutationFn: async (data: tFormData) => {

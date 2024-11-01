@@ -7,16 +7,19 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 async function enableMocking() {
-  if (process.env.NODE_ENV === 'development') {
-    const { worker } = await import('./mocks/browser')
+  if (import.meta.env.MODE === 'development') {
+    const { worker } = await import('./mocks/browser');
     return worker.start({
       onUnhandledRequest: 'bypass',
-    })
-  } else if (process.env.NODE_ENV === 'production') {
+      serviceWorker: {
+        url: `${import.meta.env.VITE_PUBLIC_URL || ''}mockServiceWorker.js`,
+      },
+    });
+  } else if (import.meta.env.MODE === 'production') {
     const { worker } = await import('./mocks/browser');
     worker.start({
       serviceWorker: {
-        url: `${process.env.PUBLIC_URL}/register-user/mockServiceWorker.js`,
+        url: `${import.meta.env.VITE_PUBLIC_URL}mockServiceWorker.js`,
       },
     });
   }
